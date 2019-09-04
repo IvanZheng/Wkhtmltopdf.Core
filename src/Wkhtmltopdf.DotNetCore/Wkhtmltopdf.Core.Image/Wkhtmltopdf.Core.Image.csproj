@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/IvanZheng/Wkhtmltopdf.Core/</PackageProjectUrl>
+    <Description>Base on https://github.com/flopik3-5/WkHtmlWrapper and add linux support.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
