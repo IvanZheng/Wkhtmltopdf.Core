@@ -17,8 +17,9 @@ namespace Tests
             var services = new ServiceCollection();
             services.AddWkHtml2ImageConverter();
             services.AddWkHtml2PdfConverter();
-            using (var provider = services.BuildServiceProvider())
+            using (var scope = services.BuildServiceProvider().CreateScope())
             {
+                var provider = scope.ServiceProvider;
                 var html = "<html><body><h2>Hello World!</h2></body></html>";
                 var imageConvertor = provider.GetService<IHtmlToImageConverter>();
                 var pdfConvertor = provider.GetService<IHtmlToPdfConverter>();

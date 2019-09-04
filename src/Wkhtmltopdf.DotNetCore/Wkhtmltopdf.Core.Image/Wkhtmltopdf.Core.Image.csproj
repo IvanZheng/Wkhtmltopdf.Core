@@ -5,7 +5,7 @@
     <PackageProjectUrl>https://github.com/IvanZheng/Wkhtmltopdf.Core/</PackageProjectUrl>
     <Description>Base on https://github.com/flopik3-5/WkHtmlWrapper and add linux support.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

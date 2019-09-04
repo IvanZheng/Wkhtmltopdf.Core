@@ -1,12 +1,21 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Wkhtmltopdf.Core.Attributes;
 using Wkhtmltopdf.Core.Options.Interfaces;
+using Wkhtmltopdf.Core.Services;
+using Wkhtmltopdf.Core.Services.Interfaces;
 
 namespace Wkhtmltopdf.Core.Extensions
 {
-    internal static class OptionsExtensions
+    public static class OptionsExtensions
     {
+        public static IServiceCollection AddProcessService(this IServiceCollection services)
+        {
+            services.AddSingleton<IProcessService, ProcessService>();
+            return services;
+        }
+
         public static string OptionsToCommandLineParameters(this IOptions options)
         {
             var parameters = options.GetType().GetProperties()
