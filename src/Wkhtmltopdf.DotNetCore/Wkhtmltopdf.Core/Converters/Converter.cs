@@ -57,15 +57,17 @@ namespace Wkhtmltopdf.Core.Converters
                 _executeFullPath.TryGetValue(ConverterType, out var path);
                 if (string.IsNullOrEmpty(path))
                 {
+                    var foundLocations = new List<string>();
                     var fileName = GetExecutableName();
                     var is64 = IntPtr.Size == 8;
-                    var baseUri = new Uri(Assembly.GetExecutingAssembly().GetName().EscapedCodeBase);
+                    var baseUri = new Uri(typeof(TOptions).Assembly.GetName().EscapedCodeBase);
                     var baseDirectory = Path.GetDirectoryName(baseUri.LocalPath);
                     string dllDirectory;
                     path = Path.Combine(baseDirectory ?? throw new InvalidOperationException(), fileName);
 
                     if (!File.Exists(path))
                     {
+                        foundLocations.Add(path);
                         dllDirectory = Path.Combine(baseDirectory,
                                                     is64
                                                         ? @"runtimes\win-x64\native"
@@ -75,9 +77,27 @@ namespace Wkhtmltopdf.Core.Converters
 
                     if (!File.Exists(path))
                     {
+                        foundLocations.Add(path);
                         dllDirectory = Path.Combine(baseDirectory,
                                                     is64 ? "x64" : "x86");
                         path = Path.Combine(dllDirectory, fileName);
+                    }
+
+                    if (!File.Exists(path))
+                    {
+                        foundLocations.Add(path);
+                        baseDirectory = Path.Combine(baseDirectory, "../../");
+                        dllDirectory = Path.Combine(baseDirectory,
+                                                    is64
+                                                        ? @"runtimes\win-x64\native"
+                                                        : @"runtimes\win-x86\native");
+                        path = Path.Combine(dllDirectory, fileName);
+                    }
+
+                    if (!File.Exists(path))
+                    {
+                        foundLocations.Add(path);
+                        throw new Exception($"Can not find execute path in any location: {string.Join(";", foundLocations)}");
                     }
                     _executeFullPath[ConverterType] = path;
                 }

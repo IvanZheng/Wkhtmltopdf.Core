@@ -5,16 +5,11 @@
     <PackageProjectUrl>https://github.com/IvanZheng/Wkhtmltopdf.Core/</PackageProjectUrl>
     <Description>Base on https://github.com/flopik3-5/WkHtmlWrapper and add linux support.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <PackageId>Wkhtmltopdf.Core.Image</PackageId>
     
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Executables\image.win.exe" />
-    <None Remove="lib\runtimes\win-x64\native\image.win.exe" />
-    <None Remove="lib\runtimes\win-x86\native\image.win.exe" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
@@ -27,16 +22,16 @@
 
   
   <ItemGroup>
-    <None Update="runtimes\win-x64\native\wkhtmltoimage.exe">
+    <Content Include="runtimes\win-x64\native\wkhtmltoimage.exe">
       <PackagePath>runtimes/win-x64/native/wkhtmltoimage.exe</PackagePath>
       <Pack>true</Pack>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="runtimes\win-x86\native\wkhtmltoimage.exe">
+    </Content>
+    <Content Include="runtimes\win-x86\native\wkhtmltoimage.exe">
       <PackagePath>runtimes/win-x86/native/wkhtmltoimage.exe</PackagePath>
       <Pack>true</Pack>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>

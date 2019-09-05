@@ -5,21 +5,22 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Base on https://github.com/flopik3-5/WkHtmlWrapper and add linux support.</Description>
     <PackageProjectUrl>https://github.com/IvanZheng/Wkhtmltopdf.Core</PackageProjectUrl>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <PackageId>Wkhtmltopdf.Core.Pdf</PackageId>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <None Update="runtimes\win-x64\native\wkhtmltopdf.exe">
+    <Content Include="runtimes\win-x64\native\wkhtmltopdf.exe">
       <PackagePath>runtimes/win-x64/native/wkhtmltopdf.exe</PackagePath>
       <Pack>true</Pack>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="runtimes\win-x86\native\wkhtmltopdf.exe">
+    </Content>
+    <Content Include="runtimes\win-x86\native\wkhtmltopdf.exe">
       <PackagePath>runtimes/win-x86/native/wkhtmltopdf.exe</PackagePath>
       <Pack>true</Pack>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
