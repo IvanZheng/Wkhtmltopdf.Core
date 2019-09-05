@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ namespace Wkhtmltopdf.Core.Converters
 {
     public abstract class Converter<TOptions> : IConverter<TOptions> where TOptions: IOptions, new()
     {
+        private static Dictionary<ConverterType, string> _executeFullPath = new Dictionary<ConverterType, string>();
         private readonly IProcessService _processService;
 
         protected ConverterType ConverterType;
@@ -45,11 +48,41 @@ namespace Wkhtmltopdf.Core.Converters
             File.Delete(inputFilePath);
         }
         
+
+
         private string GetExecutablePath()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Executables", GetExecutableName());
+                _executeFullPath.TryGetValue(ConverterType, out var path);
+                if (string.IsNullOrEmpty(path))
+                {
+                    var fileName = GetExecutableName();
+                    var is64 = IntPtr.Size == 8;
+                    var baseUri = new Uri(Assembly.GetExecutingAssembly().GetName().EscapedCodeBase);
+                    var baseDirectory = Path.GetDirectoryName(baseUri.LocalPath);
+                    string dllDirectory;
+                    path = Path.Combine(baseDirectory ?? throw new InvalidOperationException(), fileName);
+
+                    if (!File.Exists(path))
+                    {
+                        dllDirectory = Path.Combine(baseDirectory,
+                                                    is64
+                                                        ? @"runtimes\win-x64\native"
+                                                        : @"runtimes\win-x86\native");
+                        path = Path.Combine(dllDirectory, fileName);
+                    }
+
+                    if (!File.Exists(path))
+                    {
+                        dllDirectory = Path.Combine(baseDirectory,
+                                                    is64 ? "x64" : "x86");
+                        path = Path.Combine(dllDirectory, fileName);
+                    }
+                    _executeFullPath[ConverterType] = path;
+                }
+
+                return path; //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Executables", GetExecutableName());
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || 
                      RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -69,12 +102,9 @@ namespace Wkhtmltopdf.Core.Converters
             }
         }
 
-        private string GetExecutableName() =>
-            $"{ConverterType}.{GetOsDependentExecutableNamePart()}".ToLower();
-
-        private string GetOsDependentExecutableNamePart()
+        private string GetExecutableName()
         {
-            return "win.exe";
+            return ConverterType == ConverterType.Image ? "wkhtmltoimage.exe" : "wkhtmltopdf.exe";
         }
 
         private string SaveFile(Stream inputStream)
