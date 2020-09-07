@@ -1,0 +1,118 @@
+﻿<body>
+    <style type="text/css">
+        .bg {
+            width: 100vw;
+            height: 80vw;
+            background: url(https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/112/temporary2.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .wrapper {
+            display: flex;
+        }
+
+        .common {
+            position: absolute;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(255,255,255,1);
+        }
+
+        .data {
+            font-size: 6.7vw;
+            left: 14vw;
+            top: 2vw;
+        }
+
+        .time {
+            font-size: 5.7vw;
+            left: 60vw;
+            top: 2vw;
+        }
+
+        .ac-type {
+            font-size: 5.2vw;
+            left: 14vw;
+            top: 12vw
+        }
+
+        .ac-place {
+            font-size: 5.2vw;
+            left: 51vw;
+            top: 12vw;
+            width: 40vw;
+        }
+
+        .ellipsis {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .applay-num {
+            left: 8vw;
+            top: 22vw;
+            font-size: 5.7vw;
+            color: rgba(0,0,0,1);
+        }
+
+        .place-num {
+            left: 70vw;
+            top: 22vw;
+            font-size: 5.7vw;
+            color: rgba(0,0,0,1);
+        }
+
+        .names-wrapper {
+            width: 93vw;
+            display: flex;
+            background: white;
+            height: 42vw;
+            position: absolute;
+            top: 35vw;
+            left: 3vw;
+            flex-wrap: wrap;
+        }
+
+        .name-box {
+            padding-left: 5vw;
+            height: 6vw
+        }
+
+        .name-text {
+            width: 26vw;
+            height: 6vw;
+            font-size: 4vw;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(54,54,54,1);
+            flex: 0 0 33%;
+            text-align: left;
+        }
+    </style>
+    <div class="bg">
+        <div class="wrapper">
+            <div class="common data">周一 9月7日</div>
+            <div class="common time">19:00-21:00</div>
+        </div>
+        <div class="wrapper">
+            <div class="common ac-type">自由活动</div>
+            <div class="common ac-place ellipsis">北桥小学</div>
+        </div>
+        <div class="wrapper">
+            <div class="common applay-num">报名人数：7/6</div>
+            <div class="common place-num">2片场地</div>
+        </div>
+        <div class="names-wrapper" id="nameList">
+            <div class="name-box"><div class="name-text ellipsis">1.挂1</div></div>
+            <div class="name-box"><div class="name-text ellipsis">2.挂2</div></div>
+            <div class="name-box"><div class="name-text ellipsis">3.代报名1</div></div>
+            <div class="name-box"><div class="name-text ellipsis">4.代报名2</div></div>
+            <div class="name-box"><div class="name-text ellipsis">5.代报名3</div></div>
+            <div class="name-box"><div class="name-text ellipsis">6.代报名4</div></div>
+            <div class="name-box"><div class="name-text ellipsis">7.1223</div></div>
+        </div>
+    </div>
+</body>

@@ -31,5 +31,8 @@ namespace Wkhtmltopdf.Core.Image.Options
 
         [ConsoleLineParameter("--zoom")]
         public float Zoom { get; set; } = 1;
+
+        [ConsoleLineParameter("--encoding")]
+        public string Encoding { get; set; } = "utf8";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Wkhtmltopdf.Core.Image;
@@ -20,7 +21,7 @@ namespace Tests
             using (var scope = services.BuildServiceProvider().CreateScope())
             {
                 var provider = scope.ServiceProvider;
-                var html = "<html><body><h2>Hello World!</h2></body></html>";
+                var html = File.ReadAllText("demo.html");
                 var imageConvertor = provider.GetService<IHtmlToImageConverter>();
                 var pdfConvertor = provider.GetService<IHtmlToPdfConverter>();
                 await pdfConvertor.ConvertAsync(html, "test.pdf", new GeneralPdfOptions{PageWidth = 750});

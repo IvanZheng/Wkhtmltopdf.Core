@@ -47,5 +47,8 @@ namespace Wkhtmltopdf.Core.Pdf.Options
 
         [ConsoleLineParameter("--title")]
         public string Title { get; set; }
+
+        [ConsoleLineParameter("--encoding")]
+        public string Encoding { get; set; } = "utf8";
     }
 }
