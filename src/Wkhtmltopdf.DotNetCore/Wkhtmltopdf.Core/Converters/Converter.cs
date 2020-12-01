@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Wkhtmltopdf.Core.Converters.Interfaces;
 using Wkhtmltopdf.Core.Enums;
 using Wkhtmltopdf.Core.Options.Interfaces;
@@ -16,18 +17,15 @@ namespace Wkhtmltopdf.Core.Converters
 {
     public abstract class Converter<TOptions> : IConverter<TOptions> where TOptions: IOptions, new()
     {
-        private static Dictionary<ConverterType, string> _executeFullPath = new Dictionary<ConverterType, string>();
+        protected ILogger Logger { get; set; }
+        private static readonly Dictionary<ConverterType, string> ExecuteFullPath = new Dictionary<ConverterType, string>();
         private readonly IProcessService _processService;
 
         protected ConverterType ConverterType;
 
-        protected Converter()
+        protected Converter(IProcessService processService, ILogger logger)
         {
-            _processService = new ProcessService();
-        }
-
-        public Converter(IProcessService processService)
-        {
+            Logger = logger;
             this._processService = processService;
         }
 
@@ -44,7 +42,9 @@ namespace Wkhtmltopdf.Core.Converters
         {
             var inputFilePath = SaveFile(html);
             var arguments = $"{options.OptionsToCommandLineParameters()} {inputFilePath} {outputFile}";
-            await _processService.StartAsync(GetExecutablePath(), arguments);
+            var executablePath = GetExecutablePath();
+            Logger.LogInformation($"{executablePath} {arguments}");
+            await _processService.StartAsync(executablePath, arguments);
             File.Delete(inputFilePath);
         }
         
@@ -54,7 +54,7 @@ namespace Wkhtmltopdf.Core.Converters
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                _executeFullPath.TryGetValue(ConverterType, out var path);
+                ExecuteFullPath.TryGetValue(ConverterType, out var path);
                 if (string.IsNullOrEmpty(path))
                 {
                     var foundLocations = new List<string>();
@@ -99,7 +99,7 @@ namespace Wkhtmltopdf.Core.Converters
                         foundLocations.Add(path);
                         throw new Exception($"Can not find execute path in any location: {string.Join(";", foundLocations)}");
                     }
-                    _executeFullPath[ConverterType] = path;
+                    ExecuteFullPath[ConverterType] = path;
                 }
 
                 return path; //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Executables", GetExecutableName());

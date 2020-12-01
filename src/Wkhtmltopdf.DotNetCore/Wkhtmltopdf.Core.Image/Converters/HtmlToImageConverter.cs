@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 using Wkhtmltopdf.Core.Image.Converters.Interfaces;
 using Wkhtmltopdf.Core.Converters;
 using Wkhtmltopdf.Core.Enums;
@@ -11,12 +12,8 @@ namespace Wkhtmltopdf.Core.Image.Converters
 {
     public class HtmlToImageConverter : Converter<GeneralImageOptions>, IHtmlToImageConverter
     {
-        public HtmlToImageConverter()
-        {
-            ConverterType = ConverterType.Image;
-        }
 
-        internal HtmlToImageConverter(IProcessService processService) : base(processService)
+        internal HtmlToImageConverter(IProcessService processService, ILogger<HtmlToImageConverter> logger) : base(processService, logger)
         {
             ConverterType = ConverterType.Image;
         }

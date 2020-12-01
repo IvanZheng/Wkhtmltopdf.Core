@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 using Wkhtmltopdf.Core.Pdf.Converters.Interfaces;
 using Wkhtmltopdf.Core.Pdf.Options;
 using Wkhtmltopdf.Core.Converters;
@@ -9,12 +10,7 @@ namespace Wkhtmltopdf.Core.Pdf.Converters
 {
     public class HtmlToPdfConverter : Converter<GeneralPdfOptions>, IHtmlToPdfConverter
     {
-        public HtmlToPdfConverter()
-        {
-            ConverterType = ConverterType.Pdf;
-        }
-
-        internal HtmlToPdfConverter(IProcessService processService) : base(processService)
+        internal HtmlToPdfConverter(IProcessService processService, ILogger<HtmlToPdfConverter> logger) : base(processService, logger)
         {
             ConverterType = ConverterType.Pdf;
         }
