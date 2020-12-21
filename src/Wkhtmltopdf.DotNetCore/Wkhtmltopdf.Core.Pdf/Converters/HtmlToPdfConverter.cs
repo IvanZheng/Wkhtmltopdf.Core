@@ -10,7 +10,7 @@ namespace Wkhtmltopdf.Core.Pdf.Converters
 {
     public class HtmlToPdfConverter : Converter<GeneralPdfOptions>, IHtmlToPdfConverter
     {
-        internal HtmlToPdfConverter(IProcessService processService, ILogger<HtmlToPdfConverter> logger) : base(processService, logger)
+        public HtmlToPdfConverter(IProcessService processService, ILogger<HtmlToPdfConverter> logger) : base(processService, logger)
         {
             ConverterType = ConverterType.Pdf;
         }

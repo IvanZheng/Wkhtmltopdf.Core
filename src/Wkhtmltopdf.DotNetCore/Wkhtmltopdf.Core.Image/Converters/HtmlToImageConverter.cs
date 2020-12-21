@@ -13,7 +13,7 @@ namespace Wkhtmltopdf.Core.Image.Converters
     public class HtmlToImageConverter : Converter<GeneralImageOptions>, IHtmlToImageConverter
     {
 
-        internal HtmlToImageConverter(IProcessService processService, ILogger<HtmlToImageConverter> logger) : base(processService, logger)
+        public HtmlToImageConverter(IProcessService processService, ILogger<HtmlToImageConverter> logger) : base(processService, logger)
         {
             ConverterType = ConverterType.Image;
         }

@@ -16,16 +16,17 @@ namespace Tests
         static async Task Main(string[] args)
         {
             var services = new ServiceCollection();
+            services.AddLogging();
             services.AddWkHtml2ImageConverter();
             services.AddWkHtml2PdfConverter();
             using (var scope = services.BuildServiceProvider().CreateScope())
             {
                 var provider = scope.ServiceProvider;
-                var html = File.ReadAllText("demo.html");
+                var html = await File.ReadAllTextAsync("demo.html");
                 var imageConvertor = provider.GetService<IHtmlToImageConverter>();
                 var pdfConvertor = provider.GetService<IHtmlToPdfConverter>();
-                await pdfConvertor.ConvertAsync(html, "test.pdf", new GeneralPdfOptions{PageWidth = 750});
-                await imageConvertor.ConvertAsync(html, "test.png", new GeneralImageOptions { Width = 750 });
+                //await pdfConvertor.ConvertAsync(html, "test.pdf", new GeneralPdfOptions{PageWidth = 750});
+                await imageConvertor.ConvertAsync(html, "test.png", new GeneralImageOptions { Width = 1020, Height = 1275});
             }
         }
     }

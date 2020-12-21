@@ -1,118 +1,938 @@
-﻿<body>
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
     <style type="text/css">
+        .tablex {
+            border: 1px solid #191919;
+            border-collapse: collapse;
+            text-align: center;
+            /*table-layout:fixed*/
+        }
+
+        .space-color {
+            background: rgba(255, 177, 54, 0.24);
+        }
+
+        .tablex th, .tablex td {
+            border: 1px solid #191919;
+            /*padding: 10px;*/
+            padding-right: 4px;
+            padding-left: 4px;
+        }
+
+        .leftWidth {
+            width: 80px;
+        }
+
         .bg {
-            width: 100vw;
-            height: 80vw;
-            background: url(https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/112/temporary2.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
+            background: #ffffff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
         }
 
-        .wrapper {
+        .round {
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 173, 234, 1);
+            border-radius: 50%;
+        }
+
+        .round-color {
+            background: rgba(244, 80, 120, 1);
+        }
+
+        .display_flex {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             display: flex;
         }
 
-        .common {
-            position: absolute;
-            font-family: PingFang SC;
-            font-weight: 500;
-            color: rgba(255,255,255,1);
+            .display_flex > * {
+                /*display: block;*/
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+
+        .display_inline-flex {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: -webkit-inline-flex;
+            display: inline-flex;
         }
 
-        .data {
-            font-size: 6.7vw;
-            left: 14vw;
-            top: 2vw;
+            .display_inline-flex > * {
+                display: block;
+            }
+        /*伸缩流方向*/
+        .flex-direction_column {
+            -webkit-box-orient: vertical;
+            -ms-flex-direction: column;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+        /*主轴对齐*/
+        .justify-content_flex-center {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
         }
 
-        .time {
-            font-size: 5.7vw;
-            left: 60vw;
-            top: 2vw;
+        .justify-content_flex-end {
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            -webkit-justify-content: flex-end;
+            justify-content: flex-end;
         }
 
-        .ac-type {
-            font-size: 5.2vw;
-            left: 14vw;
-            top: 12vw
+        .justify-content_flex-justify {
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+        /*侧轴对齐*/
+        .align-items_flex-start {
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            -webkit-align-items: flex-start;
+            align-items: flex-start;
         }
 
-        .ac-place {
-            font-size: 5.2vw;
-            left: 51vw;
-            top: 12vw;
-            width: 40vw;
+        .align-items_flex-end {
+            -webkit-box-align: end;
+            -ms-flex-align: end;
+            -webkit-align-items: flex-end;
+            align-items: flex-end;
         }
 
-        .ellipsis {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+        .align-items_center {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
         }
 
-        .applay-num {
-            left: 8vw;
-            top: 22vw;
-            font-size: 5.7vw;
-            color: rgba(0,0,0,1);
+        .align-items_baseline {
+            -webkit-box-align: baseline;
+            -ms-flex-align: baseline;
+            -webkit-align-items: baseline;
+            align-items: baseline;
+        }
+        /*伸缩性*/
+        .flex_auto {
+            -webkit-box-flex: 1;
+            -ms-flex: auto;
+            -webkit-flex: auto;
+            flex: auto;
         }
 
-        .place-num {
-            left: 70vw;
-            top: 22vw;
-            font-size: 5.7vw;
-            color: rgba(0,0,0,1);
+        .flex_10 {
+            width: 17px;
+            -webkit-box-flex: 0 0 17%;
+            -ms-flex: 0 0 17%;
+            -webkit-flex: 0 0 17%;
+            flex: 0 0 17%;
         }
 
-        .names-wrapper {
-            width: 93vw;
-            display: flex;
-            background: white;
-            height: 42vw;
-            position: absolute;
-            top: 35vw;
-            left: 3vw;
-            flex-wrap: wrap;
+        .flex_80 {
+            width: 80%;
+            -webkit-box-flex: 0 0 80%;
+            -ms-flex: 0 0 80%;
+            -webkit-flex: 0 0 80%;
+            flex: 0 0 80%;
+            padding-left: 2px;
+        }
+        /*显示顺序*/
+        .order_2 {
+            -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
         }
 
-        .name-box {
-            padding-left: 5vw;
-            height: 6vw
-        }
-
-        .name-text {
-            width: 26vw;
-            height: 6vw;
-            font-size: 4vw;
-            font-family: PingFang SC;
-            font-weight: 500;
-            color: rgba(54,54,54,1);
-            flex: 0 0 33%;
-            text-align: left;
+        .order_3 {
+            -webkit-box-ordinal-group: 3;
+            -ms-flex-order: 3;
+            -webkit-order: 3;
+            order: 3;
         }
     </style>
-    <div class="bg">
-        <div class="wrapper">
-            <div class="common data">周一 9月7日</div>
-            <div class="common time">19:00-21:00</div>
+</head>
+<body>
+
+
+
+    <style type="text/css">
+        .tablex {
+            border: 1px solid #191919;
+            border-collapse: collapse;
+            text-align: center;
+            table-layout: fixed
+        }
+
+        .space-color {
+            background: rgba(255, 177, 54, 0.24);
+        }
+
+        .tablex th, .tablex td {
+            border: 1px solid #191919;
+            /*paddingpadding: 10px;*/
+        }
+
+        .leftWidth {
+            width: 80px;
+        }
+
+        .bg {
+            background: #ffffff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+        }
+
+        .round {
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 173, 234, 1);
+            border-radius: 50%;
+        }
+
+        .round-color {
+            background: rgba(244, 80, 120, 1);
+        }
+
+        .display_flex {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+        /*.display_flex > *{*/
+        /*    display: block;*/
+        /*}*/
+        .display_inline-flex {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: -webkit-inline-flex;
+            display: inline-flex;
+        }
+
+            .display_inline-flex > * {
+                display: block;
+            }
+        /*伸缩流方向*/
+        .flex-direction_column {
+            -webkit-box-orient: vertical;
+            -ms-flex-direction: column;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+        /*伸缩流方向*/
+        .flex-direction_rcolumn {
+            -webkit-box-orient: vertical;
+            -ms-flex-direction: column-reverse;
+            -webkit-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+        }
+        /*主轴对齐*/
+        .justify-content_flex-center {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+
+        .justify-content_flex-end {
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            -webkit-justify-content: flex-end;
+            justify-content: flex-end;
+        }
+
+        .justify-content_flex-justify {
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+        /*侧轴对齐*/
+        .align-items_flex-start {
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            -webkit-align-items: flex-start;
+            align-items: flex-start;
+        }
+
+        .align-items_flex-end {
+            -webkit-box-align: end;
+            -ms-flex-align: end;
+            -webkit-align-items: flex-end;
+            align-items: flex-end;
+        }
+
+        .align-items_center {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .align-items_baseline {
+            -webkit-box-align: baseline;
+            -ms-flex-align: baseline;
+            -webkit-align-items: baseline;
+            align-items: baseline;
+        }
+        /*伸缩性*/
+        .flex_auto {
+            -webkit-box-flex: 1;
+            -ms-flex: auto;
+            -webkit-flex: auto;
+            flex: auto;
+        }
+
+        .flex_10 {
+            width: 21px;
+            -webkit-box-flex: 0 0 21%;
+            -ms-flex: 0 0 21%;
+            -webkit-flex: 0 0 21%;
+            flex: 0 0 21%;
+        }
+
+        .flex_80 {
+            width: 80%;
+            -webkit-box-flex: 0 0 80%;
+            -ms-flex: 0 0 80%;
+            -webkit-flex: 0 0 80%;
+            flex: 0 0 80%;
+        }
+        /*显示顺序*/
+        .order_2 {
+            -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
+        }
+
+        .order_3 {
+            -webkit-box-ordinal-group: 3;
+            -ms-flex-order: 3;
+            -webkit-order: 3;
+            order: 3;
+        }
+    </style>
+    <div class="bg align-items_center" style=height:70px;width:896.3636363636365px;>
+        <div style="color: #888888;
+  font-size: 20px;height:70px;position:relative" class="display_flex flex-direction_rcolumn"><div style="position:absolute;bottom:0px;">2020/12/20</div></div>
+        <div style=display:flex;justify-content:center;align-items:center;>
+            <div style="display: flex;justify-content:center;align-items:center;font-size: 22px;font-weight:bold">周日12月20日19:00小循环</div>
         </div>
-        <div class="wrapper">
-            <div class="common ac-type">自由活动</div>
-            <div class="common ac-place ellipsis">北桥小学</div>
+        <div style=display:none>
+            <div style="display: flex;justify-content:center;align-items:center;font-size: 22px;font-weight:bold">小循环</div>
         </div>
-        <div class="wrapper">
-            <div class="common applay-num">报名人数：7/6</div>
-            <div class="common place-num">2片场地</div>
-        </div>
-        <div class="names-wrapper" id="nameList">
-            <div class="name-box"><div class="name-text ellipsis">1.挂1</div></div>
-            <div class="name-box"><div class="name-text ellipsis">2.挂2</div></div>
-            <div class="name-box"><div class="name-text ellipsis">3.代报名1</div></div>
-            <div class="name-box"><div class="name-text ellipsis">4.代报名2</div></div>
-            <div class="name-box"><div class="name-text ellipsis">5.代报名3</div></div>
-            <div class="name-box"><div class="name-text ellipsis">6.代报名4</div></div>
-            <div class="name-box"><div class="name-text ellipsis">7.1223</div></div>
-        </div>
-    </div>
+        <div style="width:54px;height:54px"><img style="width:54px;height:54px" src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/WechatIMG246.jpeg" /></div>
+    </div><table class='tablex' style=width:896.3636363636365px>
+        <tr style=height:69px>
+            <td class='leftWidth' style=width:146.36363636363637px;font-size:20px;> <div style="font-size:20px">友谊第一</div><div style="font-size:20px">比赛第二</div></td>
+            <td style=width:136.36363636363637px;overflow:hidden;white-space:nowrap;>
+                <div style="height: 30px;font-weight:bold;" class="display_flex align-items_center justify-content_flex-center">
+                    1
+                    <div class="round" style=position:relative;left:2px;;></div>
+                    <div class="round round-color" style=position:relative;left:2px;display:none; "></div>
+                    <div style=display:none; class="display_flex flex-direction_column align-items_center justify-content_flex-center">
+                        <div class="round round-color" style="style=" position:relative;z-index:4""></div>
+                        <div class="round" style="position:relative;z-index:3"></div>
+                    </div>
+
+
+                </div>
+                <div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block;font-weight:400; color:black;font-family: PingFang SC; ">代报名7</div><div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;font-weight:400; color:black;font-family: PingFang SC;">代报名8</div>
+            </td>
+            <td style=width:136.36363636363637px;overflow:hidden;white-space:nowrap;>
+                <div style="height: 30px;font-weight:bold;" class="display_flex align-items_center justify-content_flex-center">
+                    2
+                    <div class="round" style=position:relative;left:2px;;></div>
+                    <div class="round round-color" style=position:relative;left:2px;display:none; "></div>
+                    <div style=display:none; class="display_flex flex-direction_column align-items_center justify-content_flex-center">
+                        <div class="round round-color" style="style=" position:relative;z-index:4""></div>
+                        <div class="round" style="position:relative;z-index:3"></div>
+                    </div>
+
+
+                </div>
+                <div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block;font-weight:400; color:black;font-family: PingFang SC; ">代报名1</div><div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;font-weight:400; color:black;font-family: PingFang SC;">代报名3</div>
+            </td>
+            <td style=width:136.36363636363637px;overflow:hidden;white-space:nowrap;>
+                <div style="height: 30px;font-weight:bold;" class="display_flex align-items_center justify-content_flex-center">
+                    3
+                    <div class="round" style=position:relative;left:2px;;></div>
+                    <div class="round round-color" style=position:relative;left:2px;display:none; "></div>
+                    <div style=display:none; class="display_flex flex-direction_column align-items_center justify-content_flex-center">
+                        <div class="round round-color" style="style=" position:relative;z-index:4""></div>
+                        <div class="round" style="position:relative;z-index:3"></div>
+                    </div>
+
+
+                </div>
+                <div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block;font-weight:400; color:black;font-family: PingFang SC; ">代报名2</div><div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;font-weight:400; color:black;font-family: PingFang SC;">代报名4</div>
+            </td>
+            <td style=width:136.36363636363637px;overflow:hidden;white-space:nowrap;>
+                <div style="height: 30px;font-weight:bold;" class="display_flex align-items_center justify-content_flex-center">
+                    4
+                    <div class="round" style=position:relative;left:2px;;></div>
+                    <div class="round round-color" style=position:relative;left:2px;display:none; "></div>
+                    <div style=display:none; class="display_flex flex-direction_column align-items_center justify-content_flex-center">
+                        <div class="round round-color" style="style=" position:relative;z-index:4""></div>
+                        <div class="round" style="position:relative;z-index:3"></div>
+                    </div>
+
+
+                </div>
+                <div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block;font-weight:400; color:black;font-family: PingFang SC; ">代报名5</div><div style="font-size: 18px;width: 100%;overflow:hidden;white-space:nowrap;font-weight:400; color:black;font-family: PingFang SC;">代报名6</div>
+            </td>
+            <td style="width:68.18181818181819px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;writing-mode: tb-rl;font-size:18px;font-weight:600"><div>胜</div> <div>负</div> <div>场</div></td>
+            <td style="width:68.18181818181819px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;writing-mode: tb-rl;font-size:18px;font-weight:600"><div>净</div> <div>胜</div> <div>分</div></div></td>
+            <td style="width:68.18181818181819px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;writing-mode: tb-rl;font-size:18px;font-weight:600"><div>排</div><div> &nbsp;  </div> <div>名</div></div></td>
+        </tr>
+        <tr style=height:70.71875px>
+            <td style=height:70.71875px;overflow:hidden;white-space:nowrap;width:146.36363636363637px;>
+
+
+                <div class="display_flex">
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex">
+                        <div style="font-weight:bold;">1</div>
+                        <div>
+                            <div class="round" style=position:relative;;></div>
+                            <div class="round round-color" style=position:relative;display:none; "></div>
+                            <div style=display:none; class=>
+                                <div class="round round-color" style="position: relative; z-index: 4;left: 2px;"></div>
+                                <div class="round" style="position: relative;z-index: 3;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;"> 代报名7</div>
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;">代报名8</div>
+                    </div>
+
+                </div>
+
+            </td>
+            <td style=background:#DEDEDE>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+        font-weight:600;">
+                <div style=display:none>0-0</div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+                    font-weight:600">
+                <div style=display:none>0</div>
+            </td>
+            <td class='space-color'>
+                <div style=display:none><img src='https://popbadminton.oss-cn-shanghai.aliyuncs.com/1%402x.png?t=new Date().getTime()' style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/2%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/3%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+
+                <div style=display:none><div style=font-size:24px>1</div></div>
+            </td>
+        </tr>
+        <tr style=height:70.71875px>
+            <td style=height:70.71875px;overflow:hidden;white-space:nowrap;width:146.36363636363637px;>
+
+
+                <div class="display_flex">
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex">
+                        <div style="font-weight:bold;">2</div>
+                        <div>
+                            <div class="round" style=position:relative;;></div>
+                            <div class="round round-color" style=position:relative;display:none; "></div>
+                            <div style=display:none; class=>
+                                <div class="round round-color" style="position: relative; z-index: 4;left: 2px;"></div>
+                                <div class="round" style="position: relative;z-index: 3;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;"> 代报名1</div>
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;">代报名3</div>
+                    </div>
+
+                </div>
+
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=background:#DEDEDE>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+        font-weight:600;">
+                <div style=display:none>0-0</div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+                    font-weight:600">
+                <div style=display:none>0</div>
+            </td>
+            <td class='space-color'>
+                <div style=display:none><img src='https://popbadminton.oss-cn-shanghai.aliyuncs.com/1%402x.png?t=new Date().getTime()' style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/2%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/3%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+
+                <div style=display:none><div style=font-size:24px>1</div></div>
+            </td>
+        </tr>
+        <tr style=height:70.71875px>
+            <td style=height:70.71875px;overflow:hidden;white-space:nowrap;width:146.36363636363637px;>
+
+
+                <div class="display_flex">
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex">
+                        <div style="font-weight:bold;">3</div>
+                        <div>
+                            <div class="round" style=position:relative;;></div>
+                            <div class="round round-color" style=position:relative;display:none; "></div>
+                            <div style=display:none; class=>
+                                <div class="round round-color" style="position: relative; z-index: 4;left: 2px;"></div>
+                                <div class="round" style="position: relative;z-index: 3;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;"> 代报名2</div>
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;">代报名4</div>
+                    </div>
+
+                </div>
+
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=background:#DEDEDE>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+        font-weight:600;">
+                <div style=display:none>0-0</div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+                    font-weight:600">
+                <div style=display:none>0</div>
+            </td>
+            <td class='space-color'>
+                <div style=display:none><img src='https://popbadminton.oss-cn-shanghai.aliyuncs.com/1%402x.png?t=new Date().getTime()' style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/2%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/3%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+
+                <div style=display:none><div style=font-size:24px>1</div></div>
+            </td>
+        </tr>
+        <tr style=height:70.71875px>
+            <td style=height:70.71875px;overflow:hidden;white-space:nowrap;width:146.36363636363637px;>
+
+
+                <div class="display_flex">
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex">
+                        <div style="font-weight:bold;">4</div>
+                        <div>
+                            <div class="round" style=position:relative;;></div>
+                            <div class="round round-color" style=position:relative;display:none; "></div>
+                            <div style=display:none; class=>
+                                <div class="round round-color" style="position: relative; z-index: 4;left: 2px;"></div>
+                                <div class="round" style="position: relative;z-index: 3;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;"> 代报名5</div>
+                        <div style="font-size: 18px;font-weight:400;line-height:35.359375px;text-align:center;font-family: PingFang SC;">代报名6</div>
+                    </div>
+
+                </div>
+
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> null:null </div>
+                </div>
+            </td>
+            <td style=background:#DEDEDE>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+                <div style=display:none>
+                    <div style="font-size:24px;
+                    font-weight:600;"> undefined:undefined </div>
+                </div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+        font-weight:600;">
+                <div style=display:none>0-0</div>
+            </td>
+            <td class='space-color' style="font-size:23px;
+                    font-weight:600">
+                <div style=display:none>0</div>
+            </td>
+            <td class='space-color'>
+                <div style=display:none><img src='https://popbadminton.oss-cn-shanghai.aliyuncs.com/1%402x.png?t=new Date().getTime()' style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/2%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+                <div style=display:none><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/3%402x.png?t=new Date().getTime()" style="width:48px;height:48px"></img></div>
+
+                <div style=display:none><div style=font-size:24px>1</div></div>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <script type="text/javascript">//      var list = [{"groupName":"A","userId_1":128220,"userId_2":128221,"gender1":2,"gender2":1,"nickName1":"代报名5","nickName2":"代报名6","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":1,"isSame":false},
+//          {"groupName":"B","userId_1":128216,"userId_2":128219,"gender1":1,"gender2":2,"nickName1":"大秦登基现场直播","nickName2":"大秦登基","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53362,"score_1":null,"score_2":null,"index":2,"isSame":false},
+//          {"groupName":"C","userId_1":128218,"userId_2":128222,"gender1":2,"gender2":1,"nickName1":"代报名3","nickName2":"代报名7","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53363,"score_1":null,"score_2":null,"index":3,"isSame":false},
+//          {"groupName":"D","userId_1":128215,"userId_2":128217,"gender1":1,"gender2":1,"nickName1":"说的","nickName2":"代报名2","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":4,"isSame":true},{"groupName":"A","userId_1":128220,"userId_2":128221,"gender1":2,"gender2":1,"nickName1":"代报名5","nickName2":"代报名6","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":1,"isSame":false},
+//          {"groupName":"B","userId_1":128216,"userId_2":128219,"gender1":1,"gender2":2,"nickName1":"大秦登基现场直播","nickName2":"大秦登基","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53362,"score_1":null,"score_2":null,"index":2,"isSame":false},
+//          {"groupName":"C","userId_1":128218,"userId_2":128222,"gender1":2,"gender2":1,"nickName1":"代报名3","nickName2":"代报名7","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53363,"score_1":null,"score_2":null,"index":3,"isSame":false},
+//          {"groupName":"D","userId_1":128215,"userId_2":128217,"gender1":1,"gender2":1,"nickName1":"说的","nickName2":"代报名2","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":4,"isSame":true},{"groupName":"A","userId_1":128220,"userId_2":128221,"gender1":2,"gender2":1,"nickName1":"代报名5","nickName2":"代报名6","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":1,"isSame":false},
+//          {"groupName":"B","userId_1":128216,"userId_2":128219,"gender1":1,"gender2":2,"nickName1":"大秦登基现场直播","nickName2":"大秦登基","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53362,"score_1":null,"score_2":null,"index":2,"isSame":false},
+//          {"groupName":"C","userId_1":128218,"userId_2":128222,"gender1":2,"gender2":1,"nickName1":"代报名3","nickName2":"代报名7","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53363,"score_1":null,"score_2":null,"index":3,"isSame":false},
+//          {"groupName":"D","userId_1":128215,"userId_2":128217,"gender1":1,"gender2":1,"nickName1":"说的","nickName2":"代报名2","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":4,"isSame":true},{"groupName":"A","userId_1":128220,"userId_2":128221,"gender1":2,"gender2":1,"nickName1":"代报名5","nickName2":"代报名6","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":1,"isSame":false},
+//          {"groupName":"B","userId_1":128216,"userId_2":128219,"gender1":1,"gender2":2,"nickName1":"大秦登基现场直播","nickName2":"大秦登基","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53362,"score_1":null,"score_2":null,"index":2,"isSame":false},
+//          {"groupName":"C","userId_1":128218,"userId_2":128222,"gender1":2,"gender2":1,"nickName1":"代报名3","nickName2":"代报名7","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53363,"score_1":null,"score_2":null,"index":3,"isSame":false},
+//          {"groupName":"D","userId_1":128215,"userId_2":128217,"gender1":1,"gender2":1,"nickName1":"说的","nickName2":"代报名2","avatarUrl1":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","avatarUrl2":"https://popbadminton.oss-cn-shanghai.aliyuncs.com/micro_pop/robot.png","id":53361,"score_1":null,"score_2":null,"index":4,"isSame":true}]
+//
+//      var nameStr = "";
+//     var leftWidth =135
+//     var messageF=20
+//     var itemWidth=101
+//     var rightWidth=67
+//     var firstTr=69
+//     var trHeight=70
+//      var acHeight=70
+//     var tableWidth=leftWidth+list.length*itemWidth+rightWidth*3
+//     //自定义数组
+//      var htmlstr = `<div class="bg" style=height:${acHeight}px;width:${tableWidth}px; ><div style="color: #888888;display: flex;flex-direction: column-reverse;font-size: 10px;">2020-1-2</div><div style="display: flex;justify-content:center;align-items:center;font-size: 15px;">小循环活动你发首先就是辛苦您今年</div><div style="width: 54px;height: 54px"><img  style="width: 54px;height: 54px" src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/WechatIMG246.jpeg"/></div> </div>`;
+//     htmlstr += `<table class='tablex' style=width:${tableWidth}px>`;
+//     htmlstr += `<tr style=height:${firstTr}px>`;
+//     htmlstr +=`<td class='leftWidth' style=width:${leftWidth}px;font-size: ${messageF}px;> <div>比赛第二</div><div>友谊第一</div></td>`;
+//     for(i = 0; i < list.length; i++) {
+//         htmlstr += `<td  style=width:${itemWidth}px;overflow:hidden;white-space:nowrap;>
+// <div style="height: 30px">${i+1}
+// <div class="round" style= ${list[i].gender1==1&&list[i].gender2==1||list[i].gender1==0&&list[i].gender2==0||list[i].gender1==1&&list[i].gender2==0||list[i].gender1==0&&list[i].gender2==1?'position:relative;top:-16px;left:58px;':'position:relative;top:-16px;left:58px;display:none'};></div>
+// <div class="round round-color" style= ${list[i].gender1==2&&list[i].gender2==2?'position:relative;top:-16px;left:58px;':'position:relative;top:-16px;left:58px;display:none'}; "></div>
+// <div style= ${list[i].gender1==1&&list[i].gender2==2||list[i].gender1==0&&list[i].gender2==2||list[i].gender1==2&&list[i].gender2==1||list[i].gender1==2&&list[i].gender2==0?'':'display:none'};>
+// <div class="round round-color" style="position: relative;top: -19px;left: 77px; z-index: 4"></div>
+// <div class="round" style="position: relative;top: -22px;left: 77px;z-index: 3"></div>
+// </div>
+//
+//
+// </div>
+// <div style="font-size: 20px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block; ">${list[i].nickName1}</div><div style="font-size: 10px;width: 100%;overflow:hidden;white-space:nowrap;">${list[i].nickName2}</div>
+// </td>`;
+//     }
+//     htmlstr += `<td  style="width:${rightWidth}px"> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">胜 负 场</div></td>`;
+//     htmlstr += `<td  style="width:${rightWidth}px"> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">净 胜 分</div></td>`;
+//     htmlstr += `<td  style="width:${rightWidth}px"> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">排 名</div></td>`;
+//     htmlstr += `</tr>`;
+//     for(i = 0; i < list.length; i++) {
+//         htmlstr += `<tr  style=height:${trHeight}px >`;
+//         htmlstr += `<td  style=height:${trHeight}px;overflow:hidden;white-space:nowrap;width:${leftWidth}px;>
+//
+//
+// <div class="display_flex">
+// <div   class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex" >
+// <div>${i+1}</div>
+// <div >
+// <div class="round" style= ${list[i].gender1==1&&list[i].gender2==1||list[i].gender1==0&&list[i].gender2==0||list[i].gender1==1&&list[i].gender2==0||list[i].gender1==0&&list[i].gender2==1?'position:relative;':'position:relative;display:none'};></div>
+// <div class="round round-color" style= ${list[i].gender1==2&&list[i].gender2==2?'position:relative;':'position:relative;display:none'}; "></div>
+// <div style= ${list[i].gender1==1&&list[i].gender2==2||list[i].gender1==0&&list[i].gender2==2||list[i].gender1==2&&list[i].gender2==1||list[i].gender1==2&&list[i].gender2==0?'display:flex':'display:none'};>
+// <div class="round round-color" style="position: relative; z-index: 4"></div>
+// <div class="round" style="position: relative;z-index: 3;"></div>
+// </div>
+// </div>
+//
+// </div>
+// <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+// <div style="font-size: 20px;"> ${list[i].nickName1}</div>
+// <div style="font-size: 20px;">${list[i].nickName2}</div>
+// </div>
+//
+// </div>
+//
+// </td>`;
+//         for(j = 0; j <= list.length+2; j++) {
+//             htmlstr +=`<td  style=${i==j?'background:#DEDEDE':''}> </td>`;
+//
+//         }
+//
+//         htmlstr += "</tr>";
+//
+//     }
+//     htmlstr += "</table>";
+//     console.log(htmlstr)
+//     debugger
+
+     // document.getElementById('wrapper').innerHTML =htmlstr
+    // document.write(htmlstr);
+this.setData({
+    _ranks:this.data.rank
+})
+let _ranks=this.data._ranks.sort(function(a,b){
+    var value1 = a['row'];
+    var value2 = b['row'];
+    return value1 - value2;
+})
+console.log(_ranks)
+
+var nameStr = "";
+let list=this.data.list
+let leftWidth =this.data.leftWidth
+let messageF=this.data.messageFont
+let itemWidth=this.data.leftWidth
+let rightWidth=this.data.rightWidth
+let firstTr=this.data.firstTr
+let trHeight=this.data.trHeight
+let acHeight=this.data.acHeight
+let tableWidth=leftWidth+list.length*itemWidth+rightWidth*3
+//自定义数组
+var htmlstr = `<div class="bg align-items_center" style=height:${acHeight}px;width:${tableWidth}px; ><div style="color: #888888;display: flex;flex-direction: column-reverse;font-size: 10px;">${this.data.timeN}</div>
+           <div style=${this.data.isUpdate?'display:flex;justify-content:center;align-items:center;':'display:none'}>
+           <div style="display: flex;justify-content:center;align-items:center;font-size: 15px;">${this.data.aInfo.name}</div></div>
+           <div style=${this.data.isUpdate?'display:none':'display:flex;justify-content:center;align-items:center;'}>
+           <div style="display: flex;justify-content:center;align-items:center;font-size: 15px;">小循环</div></div>
+           <div style="width:${this.data.imgWidth}px;height:${this.data.imgWidth}px"><img  style="width:${this.data.imgWidth}px;height:${this.data.imgWidth}px" src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/WechatIMG246.jpeg"/></div> </div>`;
+htmlstr += `<table class='tablex' style=width:${tableWidth}px>`;
+htmlstr += `<tr style=height:${firstTr}px>`;
+htmlstr +=`<td class='leftWidth' style=width:${leftWidth}px;font-size:${messageF}px;> <div>比赛第二</div><div>友谊第一</div></td>`;
+for(let i = 0; i < list.length; i++) {
+    htmlstr += `<td  style=width:${itemWidth}px;overflow:hidden;white-space:nowrap;>
+      <div style="height: 30px;" class="display_flex align-items_center justify-content_flex-center">${i+1}
+      <div class="round" style= ${list[i].gender1==1&&list[i].gender2==1||list[i].gender1==0&&list[i].gender2==0||list[i].gender1==1&&list[i].gender2==0||list[i].gender1==0&&list[i].gender2==1?'position:relative;left:2px;':'position:relative;left:2px;display:none'};></div>
+      <div class="round round-color" style= ${list[i].gender1==2&&list[i].gender2==2?'position:relative;left:2px;':'position:relative;left:2px;display:none'}; "></div>
+      <div style= ${list[i].gender1==1&&list[i].gender2==2||list[i].gender1==0&&list[i].gender2==2||list[i].gender1==2&&list[i].gender2==1||list[i].gender1==2&&list[i].gender2==0?
+        '':'display:none'}; class="${list.length>14?'flex-direction_column align-items_center justify-content_flex-center':'display_flex align-items_center justify-content_flex-center'}">
+      <div class="round round-color" style="position: relative; z-index: 4;left: 3px;"></div>
+      <div class="round" style="${list.length>14?'position:relative;z-index:3;left:3px':'position:relative;z-index:3'}"></div>
+      </div>
+
+
+      </div>
+      <div style="font-size: ${list[i].fontSizeName1}px;width: 100%;overflow:hidden;white-space:nowrap;display:inline-block; ">${list[i]._nickName1}</div><div style="font-size: ${list[i].fontSizeName2}px;width: 100%;overflow:hidden;white-space:nowrap;">${list[i]._nickName2}</div>
+      </td>`;
+}
+htmlstr += `<td  style="width:${rightWidth}px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">胜 负 场</div></td>`;
+htmlstr += `<td  style="width:${rightWidth}px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">净 胜 分</div></td>`;
+htmlstr += `<td  style="width:${rightWidth}px" class='space-color'> <div style="writing-mode: vertical-rl;display: flex;justify-content: center;align-items: center;width:100%;">排 名</div></td>`;
+htmlstr += `</tr>`;
+for(let i = 0; i < list.length; i++) {
+    htmlstr += `<tr  style=height:${trHeight}px >`;
+    htmlstr += `<td  style=height:${trHeight}px;overflow:hidden;white-space:nowrap;width:${leftWidth}px;>
+
+
+      <div class="display_flex">
+      <div   class="align-items_center justify-content_flex-center flex-direction_column flex_10 display_flex" >
+      <div>${i+1}</div>
+      <div >
+      <div class="round" style= ${list[i].gender1==1&&list[i].gender2==1||list[i].gender1==0&&list[i].gender2==0||list[i].gender1==1&&list[i].gender2==0||list[i].gender1==0&&list[i].gender2==1?'position:relative;':'position:relative;display:none'};></div>
+      <div class="round round-color" style= ${list[i].gender1==2&&list[i].gender2==2?'position:relative;':'position:relative;display:none'}; "></div>
+      <div style= ${list[i].gender1==1&&list[i].gender2==2||list[i].gender1==0&&list[i].gender2==2||list[i].gender1==2&&list[i].gender2==1||list[i].gender1==2&&list[i].gender2==0?'display:flex':'display:none'};>
+      <div class="round round-color" style="position: relative; z-index: 4;left: 2px;"></div>
+      <div class="round" style="position: relative;z-index: 3;"></div>
+      </div>
+      </div>
+
+      </div>
+      <div class="align-items_center justify-content_flex-center flex-direction_column flex_80 display_flex">
+      <div style="font-size: ${list[i].fontSizeName1L}px;"> ${list[i]._nickName1L}</div>
+      <div style="font-size: ${list[i].fontSizeName2L}px;">${list[i]._nickName2L}</div>
+      </div>
+
+      </div>
+
+      </td>`;
+    for(let j = 0; j <= list.length-1; j++) {
+        htmlstr +=`<td  style=${i==j?'background:#DEDEDE':''}>
+                  <div style=${i<j&&this.data.listScore[list[i].groupName+list[j].groupName]?.score1!=null?'':'display:none'}>  <div style="font-size:${this.data.scoreFont}px;
+                  font-weight:${this.data.scoreFontWeight};"> ${this.data.listScore[list[i].groupName+list[j].groupName]?.score1}:${this.data.listScore[list[i].groupName+list[j].groupName]?.score2} </div></div>
+                  <div style=${i>j&&this.data.listScore[list[j].groupName+list[i].groupName]?.score2!=null?'':'display:none'}>  <div style="font-size:${this.data.scoreFont}px;
+                  font-weight:${this.data.scoreFontWeight};"> ${this.data.listScore[list[j].groupName+list[i].groupName]?.score2}:${this.data.listScore[list[j].groupName+list[i].groupName]?.score1} </div></div>
+                  </td>`;
+
+    }
+    htmlstr +=`<td  class='space-color'  style="font-size:${this.data.scoreFont}px;
+      font-weight:${this.data.scoreFontWeight};"><div style=${this.data.isNull?'display:none':''}>${ this.data.wins[i][0]}-${ this.data.wins[i][1]}</div> </td>`;
+    htmlstr +=`<td  class='space-color' style="font-size:${this.data.scoreFont}px;
+                  font-weight:${this.data.scoreFontWeight}"><div style=${this.data.isNull?'display:none':''}>${this.data.sumScore[i]}</div> </td>`;
+    htmlstr +=`<td  class='space-color'>
+                  <div style=${_ranks[i].rank==1&&!this.data.isNull?'':'display:none'}><img src='https://popbadminton.oss-cn-shanghai.aliyuncs.com/1%402x.png?t=new Date().getTime()'style="width:${this.data.rankWidth}px;height:${this.data.rankHeight}px"></img></div>
+                  <div style=${_ranks[i].rank==2&&!this.data.isNull?'':'display:none'}><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/2%402x.png?t=new Date().getTime()"style="width:${this.data.rankWidth}px;height:${this.data.rankHeight}px"></img></div>
+                  <div style=${_ranks[i].rank==3&&!this.data.isNull?'':'display:none'}><img src="https://popbadminton.oss-cn-shanghai.aliyuncs.com/3%402x.png?t=new Date().getTime()"style="width:${this.data.rankWidth}px;height:${this.data.rankHeight}px"></img></div>
+
+                  <div style=${_ranks[i].rank>3&&!this.data.isNull?'':'display:none'}><div style=font-size:${this.data.scoreFont}px>${_ranks[i].rank}</div></div>
+                  </td>`;
+
+    htmlstr += "</tr>";
+
+}
+htmlstr += "</table>";
+console.log(htmlstr,'k')</script>
 </body>
+</html>
+
