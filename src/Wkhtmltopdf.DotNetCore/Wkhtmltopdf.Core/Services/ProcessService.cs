@@ -6,7 +6,7 @@ namespace Wkhtmltopdf.Core.Services
 {
     internal class ProcessService : IProcessService
     {
-        public async Task StartAsync(string filename, string arguments)
+        public async Task StartAsync(string filename, string arguments, int? milliseconds = null)
         {
             await Task.Run(() =>
             {
@@ -20,7 +20,17 @@ namespace Wkhtmltopdf.Core.Services
                 };
 
                 process.Start();
-                process.WaitForExit();
+                if (milliseconds > 0)
+                {
+                    if (!process.WaitForExit(milliseconds.Value))
+                    {
+                        process.Kill();
+                    }
+                }
+                else
+                {
+                    process.WaitForExit();
+                }
             });
         }
     }

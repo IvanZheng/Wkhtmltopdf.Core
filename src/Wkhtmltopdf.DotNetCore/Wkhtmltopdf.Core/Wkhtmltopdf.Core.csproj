@@ -5,7 +5,7 @@
     <PackageProjectUrl>https://github.com/IvanZheng/Wkhtmltopdf.Core/</PackageProjectUrl>
     <Description>add log support</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <PackageId>Wkhtmltopdf.Core</PackageId>
   </PropertyGroup>
 

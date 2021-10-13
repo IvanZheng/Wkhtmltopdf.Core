@@ -5,6 +5,6 @@ namespace Wkhtmltopdf.Core.Services.Interfaces
 {
     public interface IProcessService
     {
-        Task StartAsync(string filename, string arguments);
+        Task StartAsync(string filename, string arguments, int? milliseconds = null);
     }
 }

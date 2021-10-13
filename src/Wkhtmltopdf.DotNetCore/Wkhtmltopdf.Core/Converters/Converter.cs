@@ -44,7 +44,7 @@ namespace Wkhtmltopdf.Core.Converters
             var arguments = $"{options.OptionsToCommandLineParameters()} {inputFilePath} {outputFile}";
             var executablePath = GetExecutablePath();
             Logger.LogInformation($"{executablePath} {arguments}");
-            await _processService.StartAsync(executablePath, arguments);
+            await _processService.StartAsync(executablePath, arguments, options.Timeout);
             File.Delete(inputFilePath);
         }
         

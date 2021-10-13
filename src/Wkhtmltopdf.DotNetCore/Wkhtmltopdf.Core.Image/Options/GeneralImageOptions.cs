@@ -34,5 +34,9 @@ namespace Wkhtmltopdf.Core.Image.Options
 
         [ConsoleLineParameter("--encoding")]
         public string Encoding { get; set; } = "utf8";
+        /// <summary>
+        ///  After timeout (milliseconds) process will be killed
+        /// </summary>
+        public int Timeout { get; set; }
     }
 }

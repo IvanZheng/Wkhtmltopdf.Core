@@ -26,7 +26,11 @@ namespace Wkhtmltopdf.Core.Extensions
 
         private static string OptionsPropertyToCommandLineParameter(IOptions options, PropertyInfo property)
         {
-            var propertyName = property.GetCustomAttribute<ConsoleLineParameterAttribute>().ParameterName;
+            var propertyName = property.GetCustomAttribute<ConsoleLineParameterAttribute>()?.ParameterName;
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                return string.Empty;
+            }
             var (propertyValue, skipProperty) = OptionsPropertyValueToString(options, property);
             return skipProperty 
                 ? string.Empty
